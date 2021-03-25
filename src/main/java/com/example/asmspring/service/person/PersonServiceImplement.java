@@ -14,13 +14,41 @@ public class PersonServiceImplement implements PersonService {
     PersonRepository personRepository;
 
     @Override
-    public List<PersonEntity> getAll() {
+    public List<PersonEntity> getAll()  {
         return (List<PersonEntity>) personRepository.findAll();
     }
 
     @Override
-    public PersonEntity findById(Long id) {
-        Optional<PersonEntity> person = personRepository.findById(id);
-        return person.get();
+    public List<PersonEntity> findByLastNameContaining(String name) {
+        if (name.equals("")){
+            return (List<PersonEntity>) personRepository.findAll();
+        }
+        return personRepository.findByLastNameContaining(name);
+    }
+
+    @Override
+    public List<PersonEntity> findAllBySearch(String search,String gender) {
+        return personRepository.findAllBySearch(search,gender);
+    }
+
+    @Override
+    public void save(PersonEntity person) {
+        personRepository.save(person);
+    }
+
+    //    @Override
+//    public PersonEntity findById(Long id) {
+//        Optional<PersonEntity> person = personRepository.findById(id);
+//        return person.get();
+//    }
+    @Override
+    public Optional<PersonEntity> findById(Long id) {
+
+        return personRepository.findById(id);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        personRepository.deleteById(id);
     }
 }
