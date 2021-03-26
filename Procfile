@@ -1,1 +1,1 @@
-web: java -jar build/libs/rate-0.0.1-SNAPSHOT.jar
+web: cd build ; java -Dgrails.env=prod -jar ../build/server/webapp-runner-*.jar --expand-war --port $PORT libs/*.war
